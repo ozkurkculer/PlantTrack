@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Steven4203/PlantTrack#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "mongoose": "^6.3.4"
   }
 }
