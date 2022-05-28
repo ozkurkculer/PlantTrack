@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 //Route imports
 const dht11Route = require('./routes/dht11Route');
+const soilRoute = require('./routes/soilRoute');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.listen(port, () => {
 });
 
 app.use('/dht11', dht11Route);
+app.use('/soil', soilRoute);
 
 mongoose
     .connect(
