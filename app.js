@@ -39,6 +39,7 @@ app.get('/',async (req,res) =>{
         lastSoil
     });
 });
+
 app.use('/dht11', dht11Route);
 app.use('/soil', soilRoute);
 

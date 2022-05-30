@@ -1,32 +1,32 @@
 <%- include('partials/_header'); %>
 
-    <header class="bg-primary-gradient pt-5"></header>
     <section>
-        <div class="container bg-primary-gradient py-5">
+        <div class="container py-5" style="padding-top: 120px !important;"">
             <div class="row row-cols-1 justify-content-center align-items-center">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <h1 class="display-2 fw-bold">Ortam Sıcaklıkları</h1>
                 </div>
                 <div class="col" style="width: 790.6px;text-align: center;font-family: Poppins, sans-serif;">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table table-striped table-dark">
                             <thead>
-                                <tr>
-                                    <th>Column 1</th>
-                                    <th>Column 2</th>
-                                </tr>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Sıcaklık Değeri</th>
+                                <th scope="col">Kayıt Zamanı</th>
+                              </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Cell 1</td>
-                                    <td>Cell 2</td>
-                                </tr>
-                                <tr>
-                                    <td>Cell 3</td>
-                                    <td>Cell 4</td>
-                                </tr>
+                                <% for(let i = 0; i < temps.length; i++) { %>
+                              <tr>
+                                <th scope="row"><%= i %></th>
+                                <td><%= temps[i].temperature %></td>
+                                <td><%= temps[i].timestamp %></td>
+                              </tr>
+
+                              <% } %>
                             </tbody>
-                        </table>
+                          </table>
                     </div>
                 </div>
             </div>
