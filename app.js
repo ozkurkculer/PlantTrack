@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 
 //Route imports
-const dht11Route = require('./routes/dht11Route');
+const temperatureRoute = require('./routes/temperatureRoute');
+const humidityRoute = require('./routes/humidityRoute');
 const soilRoute = require('./routes/soilRoute');
 
 //Model import
@@ -44,7 +45,8 @@ app.get('/', async (req, res) => {
     });
 });
 
-app.use('/dht11', dht11Route);
+app.use('/temperature', temperatureRoute);
+app.use('/humidity', humidityRoute);
 app.use('/soil', soilRoute);
 
 const minutes = 1,

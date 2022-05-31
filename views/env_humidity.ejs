@@ -7,22 +7,23 @@
                 </div>
                 <div class="col" style="width: 790.6px;text-align: center;font-family: Poppins, sans-serif;">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table table-striped table-dark">
                             <thead>
-                                <tr>
-                                    <th>Column 1</th>
-                                    <th>Column 2</th>
-                                </tr>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Ortam Nemi Değeri</th>
+                                <th scope="col">Kayıt Zamanı</th>
+                              </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Cell 1</td>
-                                    <td>Cell 2</td>
-                                </tr>
-                                <tr>
-                                    <td>Cell 3</td>
-                                    <td>Cell 4</td>
-                                </tr>
+                                <% for(let i = 0; i < humidity.length; i++) { %>
+                              <tr>
+                                <th scope="row"><%= i %></th>
+                                <td>%<%= humidity[i].humidity %></td>
+                                <td><%= humidity[i].timeStamp %></td>
+                              </tr>
+
+                              <% } %>
                             </tbody>
                         </table>
                     </div>

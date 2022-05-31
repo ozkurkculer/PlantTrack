@@ -1,13 +1,13 @@
 const express = require("express");
 
-const soil = require('../models/soil');
+const dht11 = require('../models/dht11');
 
 const router = express.Router();
 
 router.route('/').get(async (req,res) => {
-    const soilVal = await soil.find({});
-    res.render('soil_humidity', {
-        soilVal
+    const humidity = await dht11.find({});
+    res.render('env_humidity', {
+        humidity
     })
 });
 
