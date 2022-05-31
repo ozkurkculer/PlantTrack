@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const fetch = require('node-fetch');
 
 //Route imports
 const dht11Route = require('./routes/dht11Route');
@@ -14,10 +15,8 @@ const app = express();
 
 const port = 3000;
 
-
 //Template Engine
 app.set('view engine', 'ejs');
-
 
 //Middlewares
 app.use(bodyParser.json());
@@ -30,18 +29,56 @@ app.listen(port, () => {
     );
 });
 
-
-app.get('/',async (req,res) =>{
-    const lastDht = await dht11.findOne().sort({ field: 'asc', _id: -1 }).limit(1);
-    const lastSoil = await soil.findOne().sort({ field: 'asc', _id: -1 }).limit(1);
+app.get('/', async (req, res) => {
+    const lastDht = await dht11
+        .findOne()
+        .sort({ field: 'asc', _id: -1 })
+        .limit(1);
+    const lastSoil = await soil
+        .findOne()
+        .sort({ field: 'asc', _id: -1 })
+        .limit(1);
     res.render('index', {
         lastDht,
-        lastSoil
+        lastSoil,
     });
 });
 
 app.use('/dht11', dht11Route);
 app.use('/soil', soilRoute);
+
+const minutes = 1,
+    the_interval = minutes * 60 * 1000;
+setInterval(async function () {
+    const resTemperature = await fetch(
+        'https://api.thingspeak.com/channels/1751567/fields/1.json?api_key=FH6BYRCU7IST4Z5T&results=1'
+    ).then((response) => response.json());
+
+    const resHumidity = await fetch(
+        'https://api.thingspeak.com/channels/1751567/fields/2.json?api_key=FH6BYRCU7IST4Z5T&results=1'
+    ).then((response) => response.json());
+
+    const resSoilRatio = await fetch(
+        'https://api.thingspeak.com/channels/1751567/fields/3.json?api_key=FH6BYRCU7IST4Z5T&results=1'
+    ).then((response) => response.json());
+
+    const newDHTData = {
+        "temperature": Number(resTemperature.feeds[0].field1),
+        "humidity": Number(resHumidity.feeds[0].field2),
+        "timeStamp": resTemperature.feeds[0].created_at
+    }
+    const newSoilData = {
+        "soilRatio": Number(resSoilRatio.feeds[0].field3),
+        "timeStamp": resSoilRatio.feeds[0].created_at
+    }
+
+    await dht11.create(newDHTData);
+    await soil.create(newSoilData);
+
+    console.log(
+        `[${new Date().toLocaleString()}] >> ThingSpeak verileri eklendi.`
+    );
+}, the_interval);
 
 mongoose
     .connect(
