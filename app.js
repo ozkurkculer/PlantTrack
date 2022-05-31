@@ -49,7 +49,7 @@ app.use('/temperature', temperatureRoute);
 app.use('/humidity', humidityRoute);
 app.use('/soil', soilRoute);
 
-const minutes = 1,
+const minutes = 3,
     the_interval = minutes * 60 * 1000;
 setInterval(async function () {
     const resTemperature = await fetch(
