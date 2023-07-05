@@ -125,7 +125,7 @@ Kurulumu tamamladıktan sonra `npm start` komutu ile projeyi açabilir ve site i
 <!-- CONTACT -->
 ## Contact
 
-Mehmet Emin Özkürkçüler - [@twitter_handle](https://twitter.com/me_ozkurkculer)
+Mehmet Emin Özkürkçüler - [@me_ozkurkculer](https://twitter.com/me_ozkurkculer)
 
 Project Link: [https://github.com/ozkurkculer/PlantTrack](https://github.com/ozkurkculer/PlantTrack)
 
