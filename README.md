@@ -45,7 +45,7 @@
       </ul>
     </li>
     <li>Usage</li>
-    <li><Contact</li>
+    <li>Contact</li>
   </ol>
 </details>
 
